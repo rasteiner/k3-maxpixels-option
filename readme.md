@@ -21,7 +21,9 @@ Now, when a user tries to upload a 9000x12000 pixel image, this image will be re
 Servers have limited resources.
 
 Trying to resize a 6000x8000 pixels large image to 1224x1632 pixels, requires at least:
+```math
 (9000 * 12000 + 1224 * 1632) * 4bytes ~= 440MB of RAM.
+```
 
 If your shared hosting provider limits your max RAM per request to 256MB, you won't ever be able to resize the image on your server. 
 
