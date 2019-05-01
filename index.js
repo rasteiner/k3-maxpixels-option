@@ -63,12 +63,17 @@
         //new k-upload component
         const newUpload = {
           extends: originalUpload,
+          data: function() {
+            return {
+              maxpixels: false
+            }
+          },
           methods: {
-            upload(files) {
-              if(this.options.maxpixels) {
+            upload: function(files) {
+              if(this.maxpixels) {
                 Promise.all([...files].map(file => {
                   if (file.type.startsWith('image/')) {
-                    return resize(file, this.options.maxpixels)
+                    return resize(file, this.maxpixels)
                   } else {
                     return file
                   }
@@ -91,17 +96,15 @@
               default: false
             }
           },
-          computed: {
-            add() {
-              const o = originalSection.options.computed.add.call(this)
-              if (o) {
-                o.maxpixels = this.maxpixels
-              }
-              return o
-            }
-          },
           components: {
             'k-upload': newUpload //need to feed this in or Vue uses the original
+          },
+          updated: function() {
+            this.$nextTick(() => {
+              if(this.$refs.upload) {
+                this.$refs.upload.maxpixels = this.maxpixels
+              }
+            })
           }
         }
 
