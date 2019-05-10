@@ -28,4 +28,5 @@ Trying to resize a 9000x12000 pixels large image to 1224x1632 pixels, requires a
 If your shared hosting provider limits your max RAM per request to 256MB, you won't ever be able to resize the image on your server. 
 
 # Known issues
-On Microsoft Edge, resized images are renamed to "blob". 
+ - On Microsoft Edge, resized images are renamed to "blob". (Both the release of Kirby 3.2 and the adoption of V8 in Edge should solve this issue). 
+ - Files replaced from inside the File view will not be resized. (see issue [#2](https://github.com/rasteiner/k3-maxpixels-option/issues/2))
