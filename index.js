@@ -58,7 +58,8 @@
       function(Vue) {
         //get the default sections, so I can reuse stuff from there
         const originalUpload = Vue.options.components['k-upload'];
-        const originalSection = Vue.options.components['k-files-section'];
+        const originalSection = Vue.options.components["k-files-section"];
+        const originalField = Vue.options.components["k-files-field"];
 
         //new k-upload component
         const newUpload = {
@@ -108,9 +109,31 @@
           }
         }
 
+        const newField = {
+          extends: originalField,
+          props: {
+            maxpixels: {
+              type: [Number, Boolean],
+              default: false,
+            },
+          },
+          components: {
+            "k-upload": newUpload, //need to feed this in or Vue uses the original
+          },
+          mounted: function() {
+            this.$nextTick(() => {
+
+              if (this.$refs.fileUpload) {
+                this.$refs.fileUpload.maxpixels = this.maxpixels;
+              }
+            })
+          },
+        };
+
         //register and overwrite the components
         Vue.component('k-upload', newUpload)
         Vue.component('k-files-section', newSection)
+        Vue.component("k-files-field", newField)
       }
     ]
   })
