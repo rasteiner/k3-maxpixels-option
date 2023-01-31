@@ -22,7 +22,7 @@ Servers have limited resources.
 
 Trying to resize a 9000x12000 pixels large image to 1224x1632 pixels, requires at least:
 ```math
-(9000 * 12000 + 1224 * 1632) * 4bytes ~= 440MB of RAM.
+(9000 \times 12000 + 1224 \times 1632) * 4bytes \approx 440\textit{MB} \textrm{ of RAM}
 ```
 
 If your shared hosting provider limits your max RAM per request to 256MB, you won't ever be able to resize the image on your server. 
